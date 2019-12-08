@@ -32,6 +32,11 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     const{name, email, username, password} = this.registerForm.value;
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
+
     const signUpInforForm = new SignUpInfo(name, email, username, password);
     this.authService.signUp(signUpInforForm).subscribe(
       data => {
@@ -42,12 +47,6 @@ export class RegisterComponent implements OnInit {
         console.log('That bai');
       }
     );
-    this.submitted = true;
-    if (this.registerForm.invalid) {
-      return;
-    }
-    alert('Success');
-
   }
   onReset() {
     this.submitted = false;
